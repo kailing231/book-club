@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "_comment": "Run on demand, scoped to changed files: `npm run test:mutation:file src/<path>` (see AGENTS.md). The mutate list is the unit-tested source whitelist: append new unit-tested files here so Stryker tracks them.",
+  "packageManager": "npm",
+  "mutate": [
+    "src/lib/{validation,stats,filterSort,searchBooks,openLibrary,bookCovers,sortComments}.ts",
+    "src/components/{Toggle,FilterSidebar,BookCover,BookList,UserSection,AddBooks}.tsx"
+  ],
+  "reporters": [
+    "html",
+    "clear-text"
+  ],
+  "testRunner": "vitest",
+  "testRunner_comment": "Take a look at https://stryker-mutator.io/docs/stryker-js/vitest-runner for information about the vitest plugin.",
+  "coverageAnalysis": "perTest",
+  "thresholds": {
+    "break": 50
+  }
+}

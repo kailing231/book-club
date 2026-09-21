@@ -1,0 +1,5 @@
+schema: spec-driven
+
+rules:
+  proposal:
+    - Must use grill-me skill

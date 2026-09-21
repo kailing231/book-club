@@ -1,0 +1,20 @@
+#!/bin/sh
+# Quality gate for every commit. Keeps tests in sync with code: if code
+# changes, the new behavior must be covered here before this hook passes.
+#
+# Enabled with:  git config core.hooksPath .githooks
+set -e
+
+echo "==> pre-commit: lint"
+if ! npm run lint; then
+  echo "Lint failed. Fix issues before committing."
+  exit 1
+fi
+
+echo "==> pre-commit: tests"
+if ! npm run test; then
+  echo "Tests failed. Update or add tests covering your change before committing."
+  exit 1
+fi
+
+echo "pre-commit checks passed."
