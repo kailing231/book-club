@@ -96,7 +96,10 @@ export function AddBooks({ disabled, onAdd }: AddBooksProps) {
   }
 
   return (
-    <section className="card add-section" aria-label={UI_TEXT.addBooks.sectionAria}>
+    <section
+      className="card add-section"
+      aria-label={UI_TEXT.addBooks.sectionAria}
+    >
       <button
         type="button"
         className="btn btn--block btn--outline"
@@ -160,31 +163,30 @@ export function AddBooks({ disabled, onAdd }: AddBooksProps) {
               {rows.map((row) => (
                 <li key={row.book_api_id} className="preview-row">
                   <div className="preview-top">
-                    <BookCover
-                      cover_i={row.cover_i}
-                      title={row.title}
-                    />
+                    <BookCover cover_i={row.cover_i} title={row.title} />
                     <div className="preview-main">
-                    <h4 className="preview-title">{row.title}</h4>
-                    {row.authors.length > 0 && (
-                      <p className="preview-authors">
-                        {UI_TEXT.common.by}
-                        {row.authors.join(UI_TEXT.common.listSeparator)}
-                      </p>
-                    )}
-                    {(row.subjects ?? []).length > 0 && (
-                      <p className="preview-subjects">
-                        {(row.subjects ?? []).join(UI_TEXT.common.listSeparator)}
-                      </p>
-                    )}
-                    {row.synopsis && (
-                      <p className="preview-synopsis">
-                        {row.synopsis.length > 260
-                          ? `${row.synopsis.slice(0, 260)}${UI_TEXT.addBooks.ellipsis}`
-                          : row.synopsis}
-                      </p>
-                    )}
-                  </div>
+                      <h4 className="preview-title">{row.title}</h4>
+                      {row.authors.length > 0 && (
+                        <p className="preview-authors">
+                          {UI_TEXT.common.by}
+                          {row.authors.join(UI_TEXT.common.listSeparator)}
+                        </p>
+                      )}
+                      {(row.subjects ?? []).length > 0 && (
+                        <p className="preview-subjects">
+                          {(row.subjects ?? []).join(
+                            UI_TEXT.common.listSeparator,
+                          )}
+                        </p>
+                      )}
+                      {row.synopsis && (
+                        <p className="preview-synopsis">
+                          {row.synopsis.length > 260
+                            ? `${row.synopsis.slice(0, 260)}${UI_TEXT.addBooks.ellipsis}`
+                            : row.synopsis}
+                        </p>
+                      )}
+                    </div>
                   </div>
 
                   <div className="preview-actions">
@@ -235,10 +237,10 @@ export function AddBooks({ disabled, onAdd }: AddBooksProps) {
         <Modal onClose={() => setConfirmTarget(null)}>
           <p className="modal-text">
             {UI_TEXT.addBooks.modal.addingPrefix}{" "}
-            <strong>{confirmTarget.book.title}</strong>{" "}
-            {UI_TEXT.common.by}
+            <strong>{confirmTarget.book.title}</strong> {UI_TEXT.common.by}
             <strong>
-              {confirmTarget.book.authors.join(UI_TEXT.common.listSeparator) || UI_TEXT.common.unknown}
+              {confirmTarget.book.authors.join(UI_TEXT.common.listSeparator) ||
+                UI_TEXT.common.unknown}
             </strong>
           </p>
           <div className="modal-toggle">

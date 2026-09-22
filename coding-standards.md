@@ -42,7 +42,7 @@ These standards describe how this codebase is written today. Follow them for all
 
 ## Style
 
-- Quote style is mixed today: most of `src/lib` and `App.tsx` use single quotes without semicolons, while `BookList.tsx`, `AddBooks.tsx`, and `uiText.ts` use double quotes with semicolons. Match the style of the file you are editing; no formatter or lint rule enforces this.
+- Use double quotes with semicolons. Match the style of the file you are editing; no formatter or lint rule enforces this.
 - Concise, declarative code over verbose comments; add a brief comment only where the intent is not obvious (e.g., the header note in `uiText.ts`).
 - Keep functions small and single-purpose; pure helpers in `src/lib` stay free of UI concerns.
 

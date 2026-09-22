@@ -1,84 +1,102 @@
-import { useMemo, useState } from 'react'
-import type { User } from '../lib/types'
-import { isValidUsername } from '../lib/validation'
-import { UI_TEXT } from '../lib/uiText'
+import { useMemo, useState } from "react";
+import type { User } from "../lib/types";
+import { isValidUsername } from "../lib/validation";
+import { UI_TEXT } from "../lib/uiText";
 
 interface UserSectionProps {
-  users: User[]
-  currentUser: User | null
-  onConfirm: (user: User) => void
-  onAddUser: (name: string) => void
-  onLogout: () => void
+  users: User[];
+  currentUser: User | null;
+  onConfirm: (user: User) => void;
+  onAddUser: (name: string) => void;
+  onLogout: () => void;
 }
 
-export function UserSection({ users, currentUser, onConfirm, onAddUser, onLogout }: UserSectionProps) {
-  const [query, setQuery] = useState('')
-  const [selected, setSelected] = useState<User | null>(null)
-  const [error, setError] = useState<string>('')
+export function UserSection({
+  users,
+  currentUser,
+  onConfirm,
+  onAddUser,
+  onLogout,
+}: UserSectionProps) {
+  const [query, setQuery] = useState("");
+  const [selected, setSelected] = useState<User | null>(null);
+  const [error, setError] = useState<string>("");
 
   const matches = useMemo(() => {
-    const q = query.trim().toLowerCase()
+    const q = query.trim().toLowerCase();
     return users
       .filter((u) => u.name.toLowerCase().includes(q))
-      .sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }))
-  }, [users, query])
+      .sort((a, b) =>
+        a.name.localeCompare(b.name, undefined, { sensitivity: "base" }),
+      );
+  }, [users, query]);
 
-  const showDropdown = query.trim() !== ''
+  const showDropdown = query.trim() !== "";
 
   const exactMatch = useMemo(
-    () => users.find((u) => u.name.toLowerCase() === query.trim().toLowerCase()) ?? null,
+    () =>
+      users.find((u) => u.name.toLowerCase() === query.trim().toLowerCase()) ??
+      null,
     [users, query],
-  )
+  );
 
   function pickUser(u: User) {
-    setSelected(u)
-    setQuery(u.name)
-    setError('')
+    setSelected(u);
+    setQuery(u.name);
+    setError("");
   }
 
   function handleConfirm() {
-    setError('')
-    const user = selected ?? exactMatch
+    setError("");
+    const user = selected ?? exactMatch;
     if (user) {
-      onConfirm(user)
-      setQuery('')
-      setSelected(null)
-      return
+      onConfirm(user);
+      setQuery("");
+      setSelected(null);
+      return;
     }
-    setError(UI_TEXT.user.errors.pickFirst)
+    setError(UI_TEXT.user.errors.pickFirst);
   }
 
-  const confirmDisabled = selected === null && exactMatch === null
-  const addUserDisabled = !confirmDisabled || query.trim() === ''
-  const locked = currentUser !== null
+  const confirmDisabled = selected === null && exactMatch === null;
+  const addUserDisabled = !confirmDisabled || query.trim() === "";
+  const locked = currentUser !== null;
 
   function handleAddUser() {
-    setError('')
-    const name = query.trim()
+    setError("");
+    const name = query.trim();
     if (!isValidUsername(name)) {
-      setError(UI_TEXT.user.errors.invalidName)
-      return
+      setError(UI_TEXT.user.errors.invalidName);
+      return;
     }
     if (users.some((u) => u.name.toLowerCase() === name.toLowerCase())) {
-      setError(UI_TEXT.user.errors.exists)
-      return
+      setError(UI_TEXT.user.errors.exists);
+      return;
     }
-    onAddUser(name)
-    setQuery('')
-    setSelected(null)
+    onAddUser(name);
+    setQuery("");
+    setSelected(null);
   }
 
   function handleLogout() {
-    setQuery('')
-    setSelected(null)
-    setError('')
-    onLogout()
+    setQuery("");
+    setSelected(null);
+    setError("");
+    onLogout();
   }
 
   return (
-    <section className="card user-section" aria-label={UI_TEXT.user.sectionAria}>
+    <section
+      className="card user-section"
+      aria-label={UI_TEXT.user.sectionAria}
+    >
       <div className="actions">
-        <button type="button" className="btn btn--secondary" onClick={handleAddUser} disabled={addUserDisabled || locked}>
+        <button
+          type="button"
+          className="btn btn--secondary"
+          onClick={handleAddUser}
+          disabled={addUserDisabled || locked}
+        >
           {UI_TEXT.user.addUser}
         </button>
       </div>
@@ -92,8 +110,8 @@ export function UserSection({ users, currentUser, onConfirm, onAddUser, onLogout
           autoComplete="off"
           disabled={locked}
           onChange={(e) => {
-            setQuery(e.target.value)
-            setSelected(null)
+            setQuery(e.target.value);
+            setSelected(null);
           }}
           list={undefined}
         />
@@ -107,7 +125,7 @@ export function UserSection({ users, currentUser, onConfirm, onAddUser, onLogout
               <li key={u.id}>
                 <button
                   type="button"
-                  className={`dropdown__item ${selected?.id === u.id ? 'dropdown__item--selected' : ''}`}
+                  className={`dropdown__item ${selected?.id === u.id ? "dropdown__item--selected" : ""}`}
                   disabled={locked}
                   onClick={() => pickUser(u)}
                 >
@@ -134,12 +152,16 @@ export function UserSection({ users, currentUser, onConfirm, onAddUser, onLogout
           <p className="note">
             {UI_TEXT.user.signedInAs} <strong>{currentUser.name}</strong>
           </p>
-          <button type="button" className="btn btn--small" onClick={handleLogout}>
+          <button
+            type="button"
+            className="btn btn--small"
+            onClick={handleLogout}
+          >
             {UI_TEXT.user.logout}
           </button>
         </div>
       ) : null}
       {error ? <p className="error">{error}</p> : null}
     </section>
-  )
+  );
 }

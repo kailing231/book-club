@@ -1,14 +1,14 @@
 interface ToggleProps {
-  label: string
-  checked: boolean
-  disabled?: boolean
-  onChange: (checked: boolean) => void
+  label: string;
+  checked: boolean;
+  disabled?: boolean;
+  onChange: (checked: boolean) => void;
 }
 
 export function Toggle({ label, checked, disabled, onChange }: ToggleProps) {
   return (
     <label
-      className={`toggle ${checked ? 'toggle--on' : ''} ${disabled ? 'toggle--disabled' : ''}`}
+      className={`toggle ${checked ? "toggle--on" : ""} ${disabled ? "toggle--disabled" : ""}`}
     >
       <input
         type="checkbox"
@@ -22,5 +22,5 @@ export function Toggle({ label, checked, disabled, onChange }: ToggleProps) {
       </span>
       <span className="toggle__label">{label}</span>
     </label>
-  )
+  );
 }

@@ -248,7 +248,6 @@ function App() {
           alt={UI_TEXT.app.headerAlt}
           className="page-header__img"
         />
-        <h1>{UI_TEXT.app.title}</h1>
         <p className="tagline">{UI_TEXT.app.tagline}</p>
       </header>
 
@@ -282,9 +281,16 @@ function App() {
       />
 
       <footer className="page-footer">
-        {UI_TEXT.app.footer}
-        <br />
         {UI_TEXT.app.dataSource}
+        <br />
+        {UI_TEXT.app.footer}
+        <a
+          href="https://github.com/kailing231/book-club"
+          target="_blank"
+          rel="noreferrer"
+        >
+          {UI_TEXT.app.github}
+        </a>
       </footer>
 
       <BackToTop />

@@ -16,7 +16,8 @@ export const UI_TEXT = {
     title: "Book Club",
     tagline: "Recommend and track books with friends. No login needed.",
     headerAlt: "Book Club header",
-    footer: "This is WIP and very buggy.",
+    footer: "Source code: ",
+    github: "GitHub",
     dataSource: "Data provided by Open Library.",
     notConfigured: {
       prompt:

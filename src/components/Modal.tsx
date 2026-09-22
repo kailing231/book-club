@@ -1,18 +1,18 @@
-import { useEffect } from 'react'
+import { useEffect } from "react";
 
 interface ModalProps {
-  children: React.ReactNode
-  onClose: () => void
+  children: React.ReactNode;
+  onClose: () => void;
 }
 
 export function Modal({ children, onClose }: ModalProps) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose()
-    }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [onClose])
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [onClose]);
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -25,5 +25,5 @@ export function Modal({ children, onClose }: ModalProps) {
         {children}
       </div>
     </div>
-  )
+  );
 }
