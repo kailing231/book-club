@@ -14,7 +14,8 @@ export const UI_TEXT = {
   },
   app: {
     title: "Book Club",
-    tagline: "Recommend and track books with friends. No login needed.",
+    tagline:
+      "Recommend and track books with friends. Login to add books. No password needed.",
     headerAlt: "Book Club header",
     footer: "Source code: ",
     github: "GitHub",
